@@ -51,5 +51,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "EnJoyTheVR_Template.sln"
+    "dotnet.defaultSolution": "EnJoyTheVR.sln"
 }
