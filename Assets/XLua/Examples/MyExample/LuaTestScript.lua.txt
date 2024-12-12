@@ -1,0 +1,16 @@
+-- Получаем ссылку на трансформ объекта
+local transform = self.transform
+
+-- Инициализация — выполняется один раз при загрузке скрипта
+function Start()
+    print("Lua script initialized and ready!")
+end
+
+-- Определяем Update, который будет вызываться каждый кадр
+function Update()
+    -- Вращаем объект по оси Y
+    transform:Rotate(0, 50 * CS.UnityEngine.Time.deltaTime, 0)
+end
+
+-- Вызываем функцию Start один раз при загрузке
+Start()
