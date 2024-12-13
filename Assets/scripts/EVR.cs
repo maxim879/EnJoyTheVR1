@@ -117,5 +117,14 @@ namespace EVR
         {
             Debug.Log("RightHandChanged");
         }
+        public void BlockInput()
+        {
+            Debug.Log("StandartInputWasTurnedOFF");
+        }
+
+        public void UnblockInput()
+        {
+            Debug.Log("StandartInputWasTurnedON");
+        }
     }
 }
