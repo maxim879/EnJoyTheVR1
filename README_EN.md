@@ -175,4 +175,20 @@ function Start()
 end
 ```
 
+#### EVR:BlockInput()
+Blocks standard hand control.
+
+**Example:**
+```lua
+EVR:BlockInput()
+```
+
+#### EVR:UnblockInput()
+Unblocks standard hand control.
+
+**Example:**
+```lua
+EVR:UnblockInput()
+```
+
 ---
