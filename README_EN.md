@@ -191,4 +191,35 @@ Unblocks standard hand control.
 EVR:UnblockInput()
 ```
 
+#### EVR:SetStandardHandL()
+Returns the default left hand.
+
+**Example:**
+```lua
+EVR:SetStandardHandL()
+```
+
+#### EVR:SetStandardHandR()
+Returns the default right hand.
+
+**Example:**
+```lua
+EVR:SetStandardHandR()
+```
+
+#### EVR:BKeyCode()
+Returns the KeyCode for the "B" button on the controller.<br/>
+(Similar functions are available for AKeyCode(), XKeyCode(), YKeyCode(), RStickButtonKeyCode(), LStickButtonKeyCode(), RKeyCode(), LKeyCode(), ZRKeyCode(), ZLKeyCode(), UPKeyCode(), DownKeyCode(), LeftKeyCode(), and RightKeyCode()).
+
+**Example:**
+```lua
+local BKeyCode = EVR:BKeyCode()
+
+if CS.UnityEngine.Input.GetKey(BKeyCode) then
+   CS.UnityEngine.Debug.Log("B Button Pressed")
+end
+```
+
+
+
 ---
