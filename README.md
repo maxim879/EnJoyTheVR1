@@ -193,6 +193,36 @@ EVR:BlockInput()
 EVR:UnblockInput()
 ```
 
+#### EVR:SetStadnartHandL()
+Возвращает левую стандартную руку.
+
+**Пример:**
+```lua
+EVR:SetStadnartHandL()
+```
+
+#### EVR:SetStadnartHandR()
+Возвращает правую стандартную руку.
+
+**Пример:**
+```lua
+EVR:SetStadnartHandR()
+```
+
+#### EVR:BKeyCode()
+Передаёт KeyCode для кнопки "B" на контроллере.<br/>
+(Аналогично с AKeyCode(), XKeyCode(), YKeyCode(), RStickButtonKeyCode(), LStickButtonKeyCode(), RKeyCode(), LKeyCode(), ZRKeyCode(), ZLKeyCode(), UPKeyCode(), DownKeyCode(), LeftKeyCode(), RightKeyCode())
+
+**Пример:**
+```lua
+local BKeycode = EVR:BKeyCode()
+
+if CS.UnityEngine.Input.GetKey(BKeycode) then
+   CS.UnityEngine.Debug.Log("BButton")
+end
+```
+
+
 ---
 
 
