@@ -6,9 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MainGame.unity
+    path: Assets/Scenes/ExampleZombieGame/MainGame.unity
     guid: c2b23885c4dcb4a479d4534dd0603ba3
   - enabled: 0
-    path: Assets/Scenes/examplegame.unity
+    path: Assets/Scenes/ExampleZombieGame/examplegame.unity
     guid: df5e1048230134fa1b2d6d4e2eb8f813
   m_configObjects: {}

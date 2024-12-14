@@ -113,6 +113,15 @@ namespace EVR
             Debug.Log("LeftHandChanged");
         }
 
+        public void SetStadnartHandL()
+        {
+            Debug.Log("LeftChangedWasSetToStandart");
+        }
+        public void SetStadnartHandR()
+        {
+            Debug.Log("RightChangedWasSetToStandart");
+        }
+
         public void SetNewHandR(GameObject handObject = null)
         {
             Debug.Log("RightHandChanged");
@@ -125,6 +134,76 @@ namespace EVR
         public void UnblockInput()
         {
             Debug.Log("StandartInputWasTurnedON");
+        }
+
+        public KeyCode AKeyCode()
+        {
+            return KeyCode.A;
+        }
+
+        public KeyCode BKeyCode()
+        {
+            return KeyCode.B;
+        }
+
+        public KeyCode XKeyCode()
+        {
+            return KeyCode.X;
+        }
+
+        public KeyCode YKeyCode()
+        {
+            return KeyCode.Y;
+        }
+
+        public KeyCode RStickButtonKeyCode()
+        {
+            return KeyCode.RightShift;
+        }
+
+        public KeyCode LStickButtonKeyCode()
+        {
+            return KeyCode.LeftShift;
+        }
+
+        public KeyCode RKeyCode()
+        {
+            return KeyCode.R;
+        }
+
+        public KeyCode LKeyCode()
+        {
+            return KeyCode.L;
+        }
+
+        public KeyCode ZRKeyCode()
+        {
+            return KeyCode.F;
+        }
+
+        public KeyCode ZLKeyCode()
+        {
+            return KeyCode.M;
+        }
+
+        public KeyCode UPKeyCode()
+        {
+            return KeyCode.UpArrow;
+        }
+
+        public KeyCode DownKeyCode()
+        {
+            return KeyCode.DownArrow;
+        }
+
+        public KeyCode LeftKeyCode()
+        {
+            return KeyCode.LeftArrow;
+        }
+
+        public KeyCode RightKeyCode()
+        {
+            return KeyCode.RightArrow;
         }
     }
 }
