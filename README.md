@@ -177,6 +177,22 @@ function Start()
 end
 ```
 
+#### EVR:BlockInput()
+Блокирует стандартное управление рук.
+
+**Пример:**
+```lua
+EVR:BlockInput()
+```
+
+#### EVR:UnblockInput()
+Разблокирует стандартное управление рук.
+
+**Пример:**
+```lua
+EVR:UnblockInput()
+```
+
 ---
 
 
