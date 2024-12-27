@@ -5,6 +5,8 @@ using UnityEngine;
 using XLua;
 using System;
 using UnityEngine.SceneManagement;
+using Photon.Pun;
+using Photon.Realtime;
 
 namespace EVR
 {
@@ -206,4 +208,20 @@ namespace EVR
             return KeyCode.RightArrow;
         }
     }
+
+    // public class Photon : MonoBehaviour
+    // {
+    //     public void CreateRoom(string name)
+    //     {
+    //         PhotonNetwork.CreateRoom(name);
+    //     }
+    //     public void JoinRoom(string name)
+    //     {
+    //         PhotonNetwork.JoinRoom(name);
+    //     }
+    //     public void Instantiate(string name, Vector3 vector, Quaternion quaternion)
+    //     {
+    //         PhotonNetwork.Instantiate(name, vector, quaternion);
+    //     }
+    // }
 }

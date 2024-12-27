@@ -16,6 +16,7 @@ public class CustomLuaLoader : MonoBehaviour
     public string customModeDirectory;
     public string luaScriptName;
     public List<Injection> injections;
+    public bool UsePhoton = false;
 
     private LuaEnv luaEnv;
     private LuaTable scriptEnv;
@@ -39,6 +40,19 @@ public class CustomLuaLoader : MonoBehaviour
         else
         {
             Debug.LogError("EVR.API объект не найден в сцене.");
+        }
+
+        if(UsePhoton == true)
+        {
+            EVR.EVRPhoton photonApiInstance = FindObjectOfType<EVR.EVRPhoton>();
+            if (apiInstance != null)
+            {
+                scriptEnv.Set("EVRPhoton", photonApiInstance);
+            }
+            else
+            {
+                Debug.LogError("EVR.API объект не найден в сцене.");
+            }
         }
 
         LuaTable meta = luaEnv.NewTable();
