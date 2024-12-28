@@ -177,6 +177,23 @@ function Start()
 end
 ```
 
+#### EVR:SetNewHead(GameObject)
+Replaces the head model with the passed GameObject. If the object is not passed, it disables the head model.
+**Example:**
+```lua
+local object = someGameObject
+function Start()
+    EVR:SetNewHead(object)
+end
+```
+#### EVR:SetStandartHead()
+Returns the player's standard head.
+
+**Example:**
+```lua
+EVR:SetStandartHead()
+```
+
 #### EVR:BlockInput()
 Blocks standard hand control.
 
