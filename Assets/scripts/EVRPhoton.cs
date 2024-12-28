@@ -13,6 +13,7 @@ namespace EVR
         [LuaCallCSharp]
         private API api;
         private bool LoadScene = false;
+        public bool OnConnectedToMasterISOK = false;
         private string mapNameToLoad;
         void Start()
         {
@@ -38,13 +39,28 @@ namespace EVR
             }
             Debug.Log("joined");
         }
+        public void LeaveRoom(string MapName = null)
+        {
+            PhotonNetwork.LeaveRoom();
+            if(MapName != null)
+            {
+                api.LoadScene(MapName, true);
+            }
+            Debug.Log("left");
+        }
+        public void DisconnectFromMaster()
+        {
+            PhotonNetwork.Disconnect();
+            Debug.Log("disconnected");
+        }
         public void Instantiate(string name, Vector3 vector, Quaternion quaternion)
         {
             PhotonNetwork.Instantiate(name, vector, quaternion);
         }
         public override void OnConnectedToMaster()
         {
-            Debug.Log("ConnectetToMaster");
+            Debug.Log("ConnectedToMaster");
+            OnConnectedToMasterISOK = true;
             // CreateRoom("test");
         }
         public override void OnJoinedRoom()
