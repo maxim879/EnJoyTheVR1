@@ -156,7 +156,7 @@ end
 ```
 
 #### EVR:SetNewHandL(GameObject)
-Replaces the left hand model. If no object is passed, disables the hand model.
+Replaces the left hand GameObject. If the object is not passed, it disables the hand model. (The standard hand model is disabled, the functions remain, if necessary, block the standard input, see BlockInput)
 
 **Example:**
 ```lua
@@ -167,7 +167,7 @@ end
 ```
 
 #### EVR:SetNewHandR(GameObject)
-Replaces the right hand model. If no object is passed, disables the hand model.
+Replaces the right hand GameObject. If the object is not passed, it disables the hand model. (The standard hand model is disabled, the functions remain, if necessary, block the standard input, see BlockInput)
 
 **Example:**
 ```lua
