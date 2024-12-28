@@ -11,10 +11,15 @@ namespace Photon.Realtime.Demo
 
         [SerializeField]
         private AppSettings appSettings = new AppSettings();
+        public bool AutomaticallySyncSceneEnabled = true;
         // Start is called before the first frame update
         void Start()
         {
-            PhotonNetwork.ConnectUsingSettings(appSettings);
+            if (!PhotonNetwork.IsConnected)
+            {
+                PhotonNetwork.AutomaticallySyncScene = AutomaticallySyncSceneEnabled;
+                PhotonNetwork.ConnectUsingSettings(appSettings);
+            }
         }
     }
 }

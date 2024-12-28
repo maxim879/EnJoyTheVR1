@@ -114,6 +114,14 @@ namespace EVR
         {
             Debug.Log("LeftHandChanged");
         }
+        public void SetNewHead(GameObject head = null)
+        {
+            Debug.Log("HeadChanged");
+        }
+        public void SetStandartHead()
+        {
+            Debug.Log("HeadWasSetToStandart");
+        }
 
         public void SetStadnartHandL()
         {

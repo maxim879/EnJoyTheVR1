@@ -48,6 +48,10 @@ namespace EVR
             }
             Debug.Log("left");
         }
+        public void AutomaticallySyncSceneEnabled(bool enabled = false)
+        {
+            PhotonNetwork.AutomaticallySyncScene = enabled;
+        }
         public void DisconnectFromMaster()
         {
             PhotonNetwork.Disconnect();
