@@ -57,6 +57,16 @@ namespace EVR
             PhotonNetwork.Disconnect();
             Debug.Log("disconnected");
         }
+
+        public void RegisterInPool(string name, bool needDestroy = false)
+        {
+            Debug.Log("objectRegistered");
+            if (needDestroy == true)
+            {
+                Destroy(GameObject.Find(name));
+                Debug.Log("objectRegistered and destroyed");
+            }
+        }
         public void Instantiate(string name, Vector3 vector, Quaternion quaternion)
         {
             PhotonNetwork.Instantiate(name, vector, quaternion);

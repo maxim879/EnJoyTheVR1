@@ -17,7 +17,11 @@ namespace Photon.Realtime.Demo
         {
             if (!PhotonNetwork.IsConnected)
             {
-                PhotonNetwork.AutomaticallySyncScene = AutomaticallySyncSceneEnabled;
+                if (AutomaticallySyncSceneEnabled == true)
+                {
+                    PhotonNetwork.AutomaticallySyncScene = true;
+                }
+                
                 PhotonNetwork.ConnectUsingSettings(appSettings);
             }
         }
