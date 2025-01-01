@@ -228,6 +228,22 @@ EVR:SetStadnartHandR()
 EVR:SetStandartHead()
 ```
 
+#### EVR:EnableKeyboard(UnityEngine.UI.InputField)
+Включает клавиатуру, указывается InputField, для которого требуется ввод.
+
+**Пример:**
+```lua
+EVR:EnableKeyboard(InputField)
+```
+
+#### EVR:DisableKeyboard()
+Отключает клавиатуру.
+
+**Пример:**
+```lua
+EVR:DisableKeyboard()
+```
+
 #### EVR:BKeyCode()
 Передаёт KeyCode для кнопки "B" на контроллере.<br/>
 (Аналогично с AKeyCode(), XKeyCode(), YKeyCode(), RStickButtonKeyCode(), LStickButtonKeyCode(), RKeyCode(), LKeyCode(), ZRKeyCode(), ZLKeyCode(), UPKeyCode(), DownKeyCode(), LeftKeyCode(), RightKeyCode())
