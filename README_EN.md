@@ -226,6 +226,22 @@ Returns the default right hand.
 EVR:SetStandardHandR()
 ```
 
+#### EVR:EnableKeyboard(UnityEngine.UI.InputField)
+Turns on the keyboard, specifies the InputField for which input is required.
+
+**Example:**
+```lua
+EVR:EnableKeyboard(InputField)
+```
+
+#### EVR:DisableKeyboard()
+Turns off the keyboard.
+
+**Example:**
+```lua
+EVR:DisableKeyboard()
+```
+
 #### EVR:BKeyCode()
 Returns the KeyCode for the "B" button on the controller.<br/>
 (Similar functions are available for AKeyCode(), XKeyCode(), YKeyCode(), RStickButtonKeyCode(), LStickButtonKeyCode(), RKeyCode(), LKeyCode(), ZRKeyCode(), ZLKeyCode(), UPKeyCode(), DownKeyCode(), LeftKeyCode(), and RightKeyCode()).
