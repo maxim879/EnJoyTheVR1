@@ -1,10 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Photon.Pun;
 using Photon.Realtime;
+using System.Reflection;
 using XLua;
+using ExitGames.Client.Photon.StructWrapping;
 
 namespace EVR
 {
@@ -13,45 +13,52 @@ namespace EVR
         [LuaCallCSharp]
         private API api;
         private bool LoadScene = false;
+        public bool IsMaster = false;
         public bool OnConnectedToMasterISOK = false;
         private string mapNameToLoad;
+
         void Start()
         {
             api = FindObjectOfType<API>();
         }
+
         public void CreateRoom(string name, string MapName = null)
         {
             PhotonNetwork.CreateRoom(name);
-            if(MapName != null)
+            if (MapName != null)
             {
                 LoadScene = true;
                 mapNameToLoad = MapName;
             }
             Debug.Log("created");
         }
+
         public void JoinRoom(string name, string MapName = null)
         {
             PhotonNetwork.JoinRoom(name);
-            if(MapName != null)
+            if (MapName != null)
             {
                 LoadScene = true;
                 mapNameToLoad = MapName;
             }
             Debug.Log("joined");
         }
+
         public void LeaveRoom(string MapName = null)
         {
             PhotonNetwork.LeaveRoom();
-            if(MapName != null)
+            if (MapName != null)
             {
                 api.LoadScene(MapName, true);
             }
             Debug.Log("left");
         }
+
         public void AutomaticallySyncSceneEnabled(bool enabled = false)
         {
             PhotonNetwork.AutomaticallySyncScene = enabled;
         }
+
         public void DisconnectFromMaster()
         {
             PhotonNetwork.Disconnect();
@@ -67,16 +74,18 @@ namespace EVR
                 Debug.Log("objectRegistered and destroyed");
             }
         }
+
         public void Instantiate(string name, Vector3 vector, Quaternion quaternion)
         {
             PhotonNetwork.Instantiate(name, vector, quaternion);
         }
+
         public override void OnConnectedToMaster()
         {
             Debug.Log("ConnectedToMaster");
             OnConnectedToMasterISOK = true;
-            // CreateRoom("test");
         }
+
         public override void OnJoinedRoom()
         {
             Debug.Log("JoinedRoom");
@@ -85,6 +94,22 @@ namespace EVR
                 api.LoadScene(mapNameToLoad, true);
                 LoadScene = false;
             }
+        }
+
+        public void SetOwnership(GameObject targetObject)
+        {
+            PhotonView photonView = targetObject.GetComponent<PhotonView>();
+            photonView.TransferOwnership(PhotonNetwork.LocalPlayer);
+            Debug.Log($"Ownership of object {targetObject.name} transferred to this player.");
+        }
+        public void Sync(GameObject targetObject, string scriptName, string methodName, object[] parameters = null)
+        {
+            targetObject.GetComponent<EVRPhotonObjSync>().SyncEvent(targetObject, scriptName, methodName, parameters);
+        }
+
+        public void CheckIfMaster()
+        {
+            IsMaster = PhotonNetwork.IsMasterClient;
         }
     }
 }

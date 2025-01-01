@@ -145,6 +145,14 @@ namespace EVR
         {
             Debug.Log("StandartInputWasTurnedON");
         }
+        public void EnableKeyboard(UnityEngine.UI.InputField AttachedInputField)
+        {
+            Debug.Log("Keyboard is enabled");
+        }
+        public void DisableKeyboard()
+        {
+            Debug.Log("Keyboard is disabled");
+        }
 
         public KeyCode AKeyCode()
         {

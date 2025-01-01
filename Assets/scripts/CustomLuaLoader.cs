@@ -60,7 +60,7 @@ public class CustomLuaLoader : MonoBehaviour
         scriptEnv.SetMetaTable(meta);
         meta.Dispose();
 
-        scriptEnv.Set("self", this);
+        scriptEnv.Set("self", gameObject);
 
         foreach (var injection in injections)
         {
