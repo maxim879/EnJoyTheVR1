@@ -7,7 +7,7 @@ using System;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
 using Photon.Realtime;
-
+using TMPro;
 namespace EVR
 {
     [LuaCallCSharp]
@@ -145,7 +145,7 @@ namespace EVR
         {
             Debug.Log("StandartInputWasTurnedON");
         }
-        public void EnableKeyboard(UnityEngine.UI.InputField AttachedInputField)
+        public void EnableKeyboard(TMP_InputField AttachedInputField)
         {
             Debug.Log("Keyboard is enabled");
         }
