@@ -228,7 +228,7 @@ EVR:SetStadnartHandR()
 EVR:SetStandartHead()
 ```
 
-#### EVR:EnableKeyboard(UnityEngine.UI.InputField)
+#### EVR:EnableKeyboard(TMP_InputField)
 Включает клавиатуру, указывается InputField, для которого требуется ввод.
 
 **Пример:**
