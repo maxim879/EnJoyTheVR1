@@ -226,7 +226,7 @@ Returns the default right hand.
 EVR:SetStandardHandR()
 ```
 
-#### EVR:EnableKeyboard(UnityEngine.UI.InputField)
+#### EVR:EnableKeyboard(TMP_InputField)
 Turns on the keyboard, specifies the InputField for which input is required.
 
 **Example:**
