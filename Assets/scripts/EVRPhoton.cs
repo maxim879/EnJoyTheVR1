@@ -1,10 +1,9 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
-using System.Reflection;
 using XLua;
-using ExitGames.Client.Photon.StructWrapping;
 
 namespace EVR
 {
@@ -83,6 +82,7 @@ namespace EVR
         public override void OnConnectedToMaster()
         {
             Debug.Log("ConnectedToMaster");
+            PhotonNetwork.JoinLobby();
             OnConnectedToMasterISOK = true;
         }
 
@@ -102,6 +102,7 @@ namespace EVR
             photonView.TransferOwnership(PhotonNetwork.LocalPlayer);
             Debug.Log($"Ownership of object {targetObject.name} transferred to this player.");
         }
+
         public void Sync(GameObject targetObject, string scriptName, string methodName, object[] parameters = null)
         {
             targetObject.GetComponent<EVRPhotonObjSync>().SyncEvent(targetObject, scriptName, methodName, parameters);
