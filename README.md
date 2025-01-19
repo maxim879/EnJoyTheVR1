@@ -278,6 +278,102 @@ end
 
 ## Мультиплеер: EVRPhoton
 
-Многопользовательские режими в EnJoyTheVR основаны на [Photon 2](https://www.photonengine.com). Для использования EVRPhoton необходимо поместить префаб с названием **EVRPhoton** на каждую сцену вашего приложения, где происходит взаимодействие с функциями Photon.
+Многопользовательские приложения в EnJoyTheVR основаны на [Photon 2](https://www.photonengine.com). Для использования EVRPhoton необходимо поместить префаб с названием **EVRPhoton** на каждую сцену вашего приложения, где происходит взаимодействие с функциями Photon.
+
+<img width="80" alt="Снимок экрана 2025-01-20 в 00 36 44" src="https://github.com/user-attachments/assets/99e8c0f7-c6ef-4d30-bec6-dbcd3e361d32" />
+
+Для подключения к PhotonNetwork используйте скрипт "PhotonSetConnection.cs", поместите его на любой обьект стартовой сцены, укажите необходимые настройки, в App Id Realtime укажите Id приложения из личного кабинета [PhotonEngine](https://dashboard.photonengine.com).
+
+В проекте также присутствуют вспомогательные скрипты, которые было бы проблематично реализовать через Lua:
+
+- **EVRPhotonObjSync.cs** - Поместите его на объект, методы которого хотите синхронизировать в дальнейшем. (См. описание API)
+- **EVRPhotonServerList.cs** - Создан для работы со списком созданных комнат, требует указания serverPanelPrefab, contentParent.
+- **EVRPhotonServerPanel.cs** - Используется для определения serverPanelPrefab в скрипте **EVRPhotonServerList.cs**. Необходимо указать: TMP_Text roomNameText, TMP_Text playerCountText.
+
+### Описание API
+
+#### EVRPhoton:RegisterInPool(string name, bool needDestroy = false)
+Регистрация объектов в пуле для дальнейшего использования в мультиплеере. Необходимо сделать это в стартовой сцене в **function Start()**.
+
+**Пример:**
+```lua
+function Start()
+    EVRPhoton:RegisterInPool("Cube")
+    EVRPhoton:RegisterInPool("LHand")
+    EVRPhoton:RegisterInPool("RHand")
+    EVRPhoton:RegisterInPool("Pistol")
+end
+```
+
+#### EVRPhoton:CreateRoom(string name, string MapName = null)
+Создание комнаты, с последующей загрузкой сцены с названием указанным в MapName(при значении по умолчанию загрузка сцены не происходит).
+
+**Пример:**
+```lua
+EVRPhoton:CreateRoom(name, "Game")
+```
+
+#### EVRPhoton:JoinRoom(string name, string MapName = null)
+Подключение к существующей комнате, с последующей загрузкой сцены с названием указанным в MapName(при значении по умолчанию загрузка сцены не происходит).
+
+**Пример:**
+```lua
+function JoinRoomBut()
+    local name = Text:GetComponent("TMPro.TextMeshProUGUI").text
+    EVRPhoton:JoinRoom(name, "Game")
+end
+```
+
+#### EVRPhoton:LeaveRoom(string MapName = null)
+Отключение от комнаты, с последующей загрузкой сцены с названием указанным в MapName(при значении по умолчанию загрузка сцены не происходит).
+
+**Пример:**
+```lua
+EVRPhoton:CreateRoom("lobby")
+```
+
+#### EVRPhoton:DisconnectFromMaster()
+Отключение от PhotonNetwork.
+**Пример:**
+```lua
+EVRPhoton:DisconnectFromMaster()
+```
+
+#### EVRPhoton:Instantiate(string name, Vector3 vector, Quaternion quaternion)
+Инициализация зарегестрированного объекта в пуле на заданных координатах.
+**Пример:**
+```lua
+function Start()
+    EVRPhoton:Instantiate("Cube", CS.UnityEngine.Vector3.zero, CS.UnityEngine.Quaternion.identity)
+    EVRPhoton:Instantiate("LHand", CS.UnityEngine.Vector3.zero, CS.UnityEngine.Quaternion.identity)
+    EVRPhoton:Instantiate("RHand", CS.UnityEngine.Vector3.zero, CS.UnityEngine.Quaternion.identity)
+end
+```
+
+#### EVRPhoton:SetOwnership(GameObject targetObject)
+Передать владение GameObject локальному игроку.
+**Пример:**
+```lua
+EVRPhoton:SetOwnership(pistol)
+```
+
+#### EVRPhoton:Sync(GameObject targetObject, string scriptName, string methodName, object[] parameters = null)
+Синхронизировать исполнение нужного метода нужного объекта между игроками. На этом объекте должен находиться скрипт "EVRPhotonObjSync.cs"
+**Пример:**
+```lua
+EVRPhoton:Sync(pistol, "gun", "shoot")
+```
+
+#### EVRPhoton:CheckIfMaster()
+Обновить переменную EVRPhoton.IsMaster.
+**Пример:**
+```lua
+function Start()
+    EVRPhoton:CheckIfMaster()
+    if EVRPhoton.IsMaster == true then
+        EVRPhoton:Instantiate("Box", CS.UnityEngine.Vector3.zero, CS.UnityEngine.Quaternion.identity)
+    end
+end
+```
 
 
