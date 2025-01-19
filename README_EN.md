@@ -195,7 +195,7 @@ EVR:SetStandartHead()
 ```
 
 #### EVR:BlockInput()
-Blocks standard hand control.
+Blocks standard hand control (buttons).
 
 **Example:**
 ```lua
@@ -203,11 +203,27 @@ EVR:BlockInput()
 ```
 
 #### EVR:UnblockInput()
-Unblocks standard hand control.
+Unblocks standard hand control (buttons).
 
 **Example:**
 ```lua
 EVR:UnblockInput()
+```
+
+#### EVR:BlockStick()
+Blocks standard movement (stick).
+
+**Example:**
+```lua
+EVR:BlockStick()
+```
+
+#### EVR:UnblockStick()
+Unblocks standard movement (stick).
+
+**Example:**
+```lua
+EVR:UnblockStick()
 ```
 
 #### EVR:SetStandardHandL()
