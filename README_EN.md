@@ -274,3 +274,108 @@ end
 
 
 ---
+
+## Multiplayer: EVRPhoton
+
+Multiplayer applications in EnJoyTheVR are built on [Photon 2](https://www.photonengine.com). To use EVRPhoton, you need to place the prefab named **EVRPhoton** in every scene of your application where Photon functions are utilized.
+
+<img width="80" alt="Screenshot 2025-01-20 at 00:36:44" src="https://github.com/user-attachments/assets/99e8c0f7-c6ef-4d30-bec6-dbcd3e361d32" />
+
+To connect to PhotonNetwork, use the "PhotonSetConnection.cs" script. Attach it to any object in your starting scene, configure the required settings, and specify the application ID in the App Id Realtime field from your [PhotonEngine](https://dashboard.photonengine.com) account.
+
+The project also includes auxiliary scripts that would be difficult to implement in Lua:
+
+- **EVRPhotonObjSync.cs** - Attach this to any object whose methods you want to synchronize. (See API description below.)
+- **EVRPhotonServerList.cs** - Designed to work with the list of created rooms. Requires `serverPanelPrefab` and `contentParent` to be specified.
+- **EVRPhotonServerPanel.cs** - Used to define the `serverPanelPrefab` in the **EVRPhotonServerList.cs** script. Requires the following fields to be set: `TMP_Text roomNameText` and `TMP_Text playerCountText`.
+
+### API Description
+
+#### EVRPhoton:RegisterInPool(string name, bool needDestroy = false)
+Registers objects in a pool for future use in multiplayer. This should be done in the **function Start()** of your starting scene.
+
+**Example:**
+```lua
+function Start()
+    EVRPhoton:RegisterInPool("Cube")
+    EVRPhoton:RegisterInPool("LHand")
+    EVRPhoton:RegisterInPool("RHand")
+    EVRPhoton:RegisterInPool("Pistol")
+end
+```
+
+#### EVRPhoton:CreateRoom(string name, string MapName = null)
+Creates a room and optionally loads a scene with the specified `MapName` (if `MapName` is not provided, no scene is loaded).
+
+**Example:**
+```lua
+EVRPhoton:CreateRoom(name, "Game")
+```
+
+#### EVRPhoton:JoinRoom(string name, string MapName = null)
+Joins an existing room and optionally loads a scene with the specified `MapName` (if `MapName` is not provided, no scene is loaded).
+
+**Example:**
+```lua
+function JoinRoomBut()
+    local name = Text:GetComponent("TMPro.TextMeshProUGUI").text
+    EVRPhoton:JoinRoom(name, "Game")
+end
+```
+
+#### EVRPhoton:LeaveRoom(string MapName = null)
+Leaves the current room and optionally loads a scene with the specified `MapName` (if `MapName` is not provided, no scene is loaded).
+
+**Example:**
+```lua
+EVRPhoton:LeaveRoom("lobby")
+```
+
+#### EVRPhoton:DisconnectFromMaster()
+Disconnects from PhotonNetwork.
+
+**Example:**
+```lua
+EVRPhoton:DisconnectFromMaster()
+```
+
+#### EVRPhoton:Instantiate(string name, Vector3 vector, Quaternion quaternion)
+Instantiates a registered object from the pool at the specified coordinates.
+
+**Example:**
+```lua
+function Start()
+    EVRPhoton:Instantiate("Cube", CS.UnityEngine.Vector3.zero, CS.UnityEngine.Quaternion.identity)
+    EVRPhoton:Instantiate("LHand", CS.UnityEngine.Vector3.zero, CS.UnityEngine.Quaternion.identity)
+    EVRPhoton:Instantiate("RHand", CS.UnityEngine.Vector3.zero, CS.UnityEngine.Quaternion.identity)
+end
+```
+
+#### EVRPhoton:SetOwnership(GameObject targetObject)
+Transfers ownership of a GameObject to the local player.
+
+**Example:**
+```lua
+EVRPhoton:SetOwnership(pistol)
+```
+
+#### EVRPhoton:Sync(GameObject targetObject, string scriptName, string methodName, object[] parameters = null)
+Synchronizes the execution of a specific method on a specific object among players. The object must have the "EVRPhotonObjSync.cs" script attached.
+
+**Example:**
+```lua
+EVRPhoton:Sync(pistol, "gun", "shoot")
+```
+
+#### EVRPhoton:CheckIfMaster()
+Updates the `EVRPhoton.IsMaster` variable.
+
+**Example:**
+```lua
+function Start()
+    EVRPhoton:CheckIfMaster()
+    if EVRPhoton.IsMaster == true then
+        EVRPhoton:Instantiate("Box", CS.UnityEngine.Vector3.zero, CS.UnityEngine.Quaternion.identity)
+    end
+end
+```
