@@ -140,10 +140,17 @@ namespace EVR
         {
             Debug.Log("StandartInputWasTurnedOFF");
         }
-
+        public void BlockStick()
+        {
+            Debug.Log("StandartMovementWasTurnedOFF");
+        }
         public void UnblockInput()
         {
             Debug.Log("StandartInputWasTurnedON");
+        }
+        public void UnblockStick()
+        {
+            Debug.Log("StandartMovementWasTurnedON");
         }
         public void EnableKeyboard(TMP_InputField AttachedInputField)
         {
