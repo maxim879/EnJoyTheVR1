@@ -2,6 +2,8 @@
 <br/>
 [Example apps](https://github.com/Zhes-20/EnJoyTheVR/tree/main/Assets/Scenes)
 
+If you want to create an application for EnJoyTheVR, send a direct message to the [VK group](https://vk.com/enjoythevr) or open an Issue in the GitHub repository. Once your application idea is approved, a personal developer version of EnJoyTheVR will be provided to you.
+
 ---
 
 ## How to Create Your Own Application for EnJoyTheVR
