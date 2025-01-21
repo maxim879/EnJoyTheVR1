@@ -1,4 +1,4 @@
-// //The behavior of some methods of this script differ slightly from the script in the game, please be careful
+// //The behavior of some methods of this script differ slightly from the script in main EnJoyTheVR project, please be careful
 
 
 using UnityEngine;
@@ -10,9 +10,11 @@ using Photon.Realtime;
 using TMPro;
 namespace EVR
 {
+
     [LuaCallCSharp]
     public class API : MonoBehaviour
     {
+        public bool JoyConModeEnabled = false;
         public GameObject Player
         {
             get
