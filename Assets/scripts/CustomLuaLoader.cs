@@ -104,6 +104,15 @@ public class CustomLuaLoader : MonoBehaviour
         }
     }
 
+    void FixedUpdate()
+    {
+        if (scriptEnv != null)
+        {
+            var luaUpdate = scriptEnv.Get<Action>("FixedUpdate");
+            luaUpdate?.Invoke();
+        }
+    }
+
     void OnDestroy()
     {
         if (scriptEnv != null)
