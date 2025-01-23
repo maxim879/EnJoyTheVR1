@@ -22,6 +22,10 @@ namespace EVR
                 return GameObject.Find("PlayerController");
             }
         }
+        public GameObject PlayerHead
+        {
+            get { return GameObject.Find("EVRHead"); }
+        }
 
         private string GetAssetBundlePath()
         {
