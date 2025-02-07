@@ -62,6 +62,16 @@ namespace EVR
             PlayerPrefs.Save();
         }
 
+        public void EnableLoading()
+        {
+            Debug.Log("ENABLED LOADING SCREEN");
+        }
+
+        public void DisableLoading()
+        {
+            Debug.Log("DISABLED LOADING SCREEN");
+        }
+
         public object Load(string key, string type)
         {
             if (!PlayerPrefs.HasKey(key))
@@ -158,6 +168,14 @@ namespace EVR
         {
             Debug.Log("StandartMovementWasTurnedON");
         }
+        public void HeadModeOn()
+        {
+            Debug.Log("HeadRotationModeOn");
+        }
+        public void HeadModeOff()
+        {
+            Debug.Log("HeadRotationModeOff");
+        }
         public void EnableKeyboard(TMP_InputField AttachedInputField)
         {
             Debug.Log("Keyboard is enabled");
@@ -237,20 +255,4 @@ namespace EVR
             return KeyCode.RightArrow;
         }
     }
-
-    // public class Photon : MonoBehaviour
-    // {
-    //     public void CreateRoom(string name)
-    //     {
-    //         PhotonNetwork.CreateRoom(name);
-    //     }
-    //     public void JoinRoom(string name)
-    //     {
-    //         PhotonNetwork.JoinRoom(name);
-    //     }
-    //     public void Instantiate(string name, Vector3 vector, Quaternion quaternion)
-    //     {
-    //         PhotonNetwork.Instantiate(name, vector, quaternion);
-    //     }
-    // }
 }
