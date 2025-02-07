@@ -273,6 +273,22 @@ if CS.UnityEngine.Input.GetKey(BKeyCode) then
 end
 ```
 
+#### EVR:EnableLoading()
+Enables loading screen.
+
+**Example:**
+```lua
+EVR:EnableLoading()
+```
+
+#### EVR:DisableLoading()
+Disables loading screen.
+
+**Example:**
+```lua
+EVR:DisableLoading()
+```
+
 
 
 ---
