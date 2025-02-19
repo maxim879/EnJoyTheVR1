@@ -112,7 +112,9 @@ namespace Photon.Realtime
         DisconnectingFromNameServer,
 
         /// <summary>Client was unable to connect to Name Server and will attempt to connect with an alternative network protocol (TCP).</summary>
-        ConnectWithFallbackProtocol
+        ConnectWithFallbackProtocol,
+
+        ConnectWithoutAuthOnceWss
     }
 
 
@@ -394,16 +396,14 @@ namespace Photon.Realtime
         public PhotonPortDefinition ServerPortOverrides;
 
 
-        /// <summary>Enables the fallback to WSS, should the initial connect to the Name Server fail. Some exceptions apply.</summary>
+        /// <summary>Enables a fallback to another protocol in case a connect to the Name Server fails.</summary>
         /// <remarks>
-        /// For security reasons, a fallback to another protocol is not done when using WSS or AuthMode.AuthOnceWss.
-        /// That would compromise the expected security.
+        /// When connecting to the Name Server fails for a first time, the client will select an alternative
+        /// network protocol and re-try to connect.
         ///
-        /// If the fallback is impossible or if that connection also fails, the app logic must handle the case.
-        /// It might even make sense to just try the same connection settings once more (or ask the user to do something about
-        /// the network connectivity, firewalls, etc).
-        /// 
         /// The fallback will use the default Name Server port as defined by ProtocolToNameServerPort.
+        ///
+        /// The fallback for TCP is UDP. All other protocols fallback to TCP.
         /// </remarks>
         public bool EnableProtocolFallback { get; set; }
 
@@ -1348,14 +1348,7 @@ namespace Photon.Realtime
         /// This method will not change the current State, if this client State is PeerCreated, Disconnecting or Disconnected.
         /// In those cases, there is also no callback for the disconnect. The DisconnectedCause will only change if the client was connected.
         /// </remarks>
-        public void Disconnect()
-        {
-            this.Disconnect(DisconnectCause.DisconnectByClientLogic);
-        }
-
-        
-        /// <summary>Disconnects the client / peer from a server or stays disconnected. Internal method that sets the DisconnectedCause as well.</summary>
-        internal void Disconnect(DisconnectCause cause)
+        public void Disconnect(DisconnectCause cause = DisconnectCause.DisconnectByClientLogic)
         {
             if (this.State == ClientState.Disconnecting || this.State == ClientState.PeerCreated)
             {
@@ -2383,31 +2376,21 @@ namespace Photon.Realtime
             return actorProperties;
         }
 
-
-        /// <summary>Internally used to set the LocalPlayer's actorNumber (from -1 to the actual in-room value) and optionally the userId.</summary>
-        /// <param name="newId">New actorNr assigned when joining a room.</param>
-        /// <param name="applyUserId">Set true for offline mode. If true the player.UserId is set to this.AuthValues.UserId or a new GUID (mimicking online mode).</param>
-        public void ChangeLocalID(int newId, bool applyUserId = false)
+        /// <summary>
+        /// Internally used to set the LocalPlayer's ID (from -1 to the actual in-room ID).
+        /// </summary>
+        /// <param name="newID">New actor ID (a.k.a actorNr) assigned when joining a room.</param>
+        public void ChangeLocalID(int newID)
         {
             if (this.LocalPlayer == null)
             {
-                this.DebugReturn(DebugLevel.ERROR, "loadBalancingClient.LocalPlayer is null. It should be set in constructor and not changed. Failed to ChangeLocalID.");
-                return;
-            }
-
-            if (applyUserId)
-            {
-                this.LocalPlayer.UserId = this.AuthValues == null || string.IsNullOrEmpty(this.AuthValues.UserId) ? new System.Guid().ToString() : this.AuthValues.UserId;
-            }
-            else
-            {
-                this.LocalPlayer.UserId = null;
+                this.DebugReturn(DebugLevel.WARNING, string.Format("Local actor is null or not in mActors! mLocalActor: {0} mActors==null: {1} newID: {2}", this.LocalPlayer, this.CurrentRoom.Players == null, newID));
             }
 
             if (this.CurrentRoom == null)
             {
                 // change to new actor/player ID and make sure the player does not have a room reference left
-                this.LocalPlayer.ChangeLocalID(newId);
+                this.LocalPlayer.ChangeLocalID(newID);
                 this.LocalPlayer.RoomReference = null;
             }
             else
@@ -2416,7 +2399,7 @@ namespace Photon.Realtime
                 this.CurrentRoom.RemovePlayer(this.LocalPlayer);
 
                 // change to new actor/player ID
-                this.LocalPlayer.ChangeLocalID(newId);
+                this.LocalPlayer.ChangeLocalID(newID);
 
                 // update the room's list with the new reference
                 this.CurrentRoom.StorePlayer(this.LocalPlayer);
@@ -3167,9 +3150,25 @@ namespace Photon.Realtime
 
                     switch (this.State)
                     {
+                        case ClientState.ConnectWithoutAuthOnceWss:
+                            this.DebugReturn(DebugLevel.INFO, string.Format("AuthOnceWss failed (WSS connection could not be established: " + this.DisconnectedCause + "). Trying again with protocol: " + this.LoadBalancingPeer.TransportProtocol));
+                            this.AuthMode = AuthModeOption.Auth;
+                            // switching protocol back to ExpectedProtocol is done above this switch-block
+                            //this.LoadBalancingPeer.TransportProtocol = (ConnectionProtocol)this.ExpectedProtocol;
+                            //this.ExpectedProtocol = null;
+                            this.NameServerPortInAppSettings = 0;                  // this does not affect the ServerSettings file, just a variable at runtime
+                            this.ServerPortOverrides = new PhotonPortDefinition(); // use default ports for the fallback
+
+                            if (!this.LoadBalancingPeer.Connect(this.NameServerAddress, this.ProxyServerAddress, this.AppId, this.TokenForInit))
+                            {
+                                return;
+                            }
+
+                            this.State = ClientState.ConnectingToNameServer;
+                            break;
                         case ClientState.ConnectWithFallbackProtocol:
-                            this.EnableProtocolFallback = false;                    // the client does a fallback only one time
-                            this.LoadBalancingPeer.TransportProtocol = ConnectionProtocol.WebSocketSecure;
+                            this.EnableProtocolFallback = false; // the client does a fallback only one time
+                            this.LoadBalancingPeer.TransportProtocol = (this.LoadBalancingPeer.TransportProtocol != ConnectionProtocol.Udp) ? ConnectionProtocol.Udp : ConnectionProtocol.WebSocketSecure;
                             this.NameServerPortInAppSettings = 0;                  // this does not affect the ServerSettings file, just a variable at runtime
                             this.ServerPortOverrides = new PhotonPortDefinition(); // use default ports for the fallback
 
@@ -3248,11 +3247,19 @@ namespace Photon.Realtime
                     ClientState nextState = ClientState.Disconnecting;
                     if (this.State == ClientState.ConnectingToNameServer)
                     {
-                        if (this.EnableProtocolFallback && this.LoadBalancingPeer.UsedProtocol != ConnectionProtocol.WebSocketSecure)
+                        // if AuthOnceWss was used, try to connect again with the expected protocol (unless that is also WSS)
+                        // this is not yet considered as using a fallback protocol
+                        if (this.AuthMode == AuthModeOption.AuthOnceWss && this.ExpectedProtocol != ConnectionProtocol.WebSocketSecure)
+                        {
+                            nextState = ClientState.ConnectWithoutAuthOnceWss;
+                        }
+                        else if (this.EnableProtocolFallback)
                         {
                             // if enabled, the client can attempt to connect with another networking-protocol to check if that connects
                             nextState = ClientState.ConnectWithFallbackProtocol;
                         }
+
+                        this.AuthMode = AuthModeOption.AuthOnce;
                     }
 
                     this.State = nextState;
@@ -3285,11 +3292,18 @@ namespace Photon.Realtime
                     nextState = ClientState.Disconnecting;
                     if (this.State == ClientState.ConnectingToNameServer)
                     {
-                        if (this.EnableProtocolFallback && this.LoadBalancingPeer.UsedProtocol != ConnectionProtocol.WebSocketSecure)
+                        // if AuthOnceWss was used, try to connect again with the expected protocol (unless that is also WSS)
+                        // this is not yet considered as using a fallback protocol
+                        if (this.AuthMode == AuthModeOption.AuthOnceWss && this.ExpectedProtocol != ConnectionProtocol.WebSocketSecure)
+                        {
+                            nextState = ClientState.ConnectWithoutAuthOnceWss;
+                        }
+                        else if (this.EnableProtocolFallback)
                         {
                             // if enabled, the client can attempt to connect with another networking-protocol to check if that connects
                             nextState = ClientState.ConnectWithFallbackProtocol;
                         }
+                        this.AuthMode = AuthModeOption.AuthOnce;
                     }
 
                     this.State = nextState;
