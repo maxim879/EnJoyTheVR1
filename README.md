@@ -349,7 +349,7 @@ end
 
 **Пример:**
 ```lua
-EVRPhoton:CreateRoom("lobby")
+EVRPhoton:LeaveRoom("lobby")
 ```
 
 #### EVRPhoton:DisconnectFromMaster()
