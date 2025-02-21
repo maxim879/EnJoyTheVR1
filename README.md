@@ -19,7 +19,7 @@
 
 4. **Создайте пустой объект, назовите его “spawn”.** На его месте будет появляться игрок.
 
-**Крайне рекомендуется посмотреть примеры [готовых приложений](https://github.com/Zhes-20/EnJoyTheVR/tree/main/Assets/Scenes).**
+**Крайне рекомендуется посмотреть примеры [готовых приложений](https://github.com/Zhes-20/EnJoyTheVR/tree/main/Assets/SampleScenes).**
 
 ---
 
