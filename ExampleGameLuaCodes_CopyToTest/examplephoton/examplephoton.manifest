@@ -1,0 +1,124 @@
+ManifestFileVersion: 0
+CRC: 2730638512
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 492cfe287da6cb19550b097afcc9a44c
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 7f569efefbc4cac982aaec7c89026d71
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: 492cfe287da6cb19550b097afcc9a44c
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 54
+  Script: {instanceID: 0}
+- Class: 64
+  Script: {instanceID: 0}
+- Class: 65
+  Script: {instanceID: 0}
+- Class: 82
+  Script: {instanceID: 0}
+- Class: 83
+  Script: {instanceID: 0}
+- Class: 89
+  Script: {instanceID: 0}
+- Class: 104
+  Script: {instanceID: 0}
+- Class: 108
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 7fad0fc753c69574da87f7386983a466, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 5c6de38f13d6b1443b2c5a5a20ac08d6, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 7ee805472840d5843b863535775bbe97, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4551d019fa82c4dd68b31b96f036d64f, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: b283a768336644240941118c54baf19d, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: ad0f1afc5b47c4ae39425885bc6abe86, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 3312d7739989d2b4e91e6319e9a96d76, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 2da0c512f12947e489f739169773d7ca, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 7e904c826ded3443cad57e2692e178b5, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 07b3638c2f5db5b479ff24c2859713d4, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 6599d2af8fefff34b9b22d7353d5784d, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 5588a92c71349470b975058db2f21cc0, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 5498070e660694310a1505dc6e11a3ed, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 128
+  Script: {instanceID: 0}
+- Class: 135
+  Script: {instanceID: 0}
+- Class: 157
+  Script: {instanceID: 0}
+- Class: 196
+  Script: {instanceID: 0}
+- Class: 198
+  Script: {instanceID: 0}
+- Class: 199
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 222
+  Script: {instanceID: 0}
+- Class: 223
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Scenes/ExamplePhoton/examplephoton.unity
+- Assets/Scenes/ExamplePhoton/Game.unity
+Dependencies:
+- /Users/zhes/EnJoyTheVR_Template/EnJoyTheVR/Assets/AssetBundles/examplephotonprefabs

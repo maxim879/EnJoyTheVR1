@@ -1,0 +1,11 @@
+ManifestFileVersion: 0
+CRC: 209374064
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: examplephoton
+      Dependencies:
+        Dependency_0: examplephotonprefabs
+    Info_1:
+      Name: examplephotonprefabs
+      Dependencies: {}
