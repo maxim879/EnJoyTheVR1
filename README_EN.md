@@ -22,7 +22,7 @@ If you want to create an application for EnJoyTheVR, send a direct message to th
 
 ## How to Write Scripts?
 
-Creating a game for EnJoyTheVR is similar to creating a standard Unity game; however, due to Unity’s AssetBundle limitations, scripts must be written in Lua. However, the project already contains some assets that can be used as a ready-made solution for some solutions.
+Creating a game for EnJoyTheVR is similar to creating a standard Unity game; however, due to Unity’s AssetBundle limitations, scripts must be written in Lua. However, the project already contains some assets that can be used as a ready-made solution for some solutions (their use is allowed only for developing applications for EnJoyTheVR).
 
 ### Using CustomLuaLoader
 
