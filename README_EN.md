@@ -1,6 +1,8 @@
 [![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Oswald&weight=700&size=25&duration=1500&pause=1&color=F70000&background=100BFF00&multiline=true&repeat=false&width=435&height=80&lines=EnJoyTheVR;Application+Template)](https://git.io/typing-svg)
 <br/>
 [Example apps](https://github.com/Zhes-20/EnJoyTheVR/tree/main/Assets/Scenes)
+[Video guide for creating applications](https://youtu.be/Wr2Y20zpuxc)
+[Video guide for creating multiplayer applications](https://youtu.be/gp93QRKY9Ic)
 
 If you want to create an application for EnJoyTheVR, send a direct message to the [VK group](https://vk.com/enjoythevr) or open an Issue in the GitHub repository. Once your application idea is approved, a personal developer version of EnJoyTheVR will be provided to you.
 
