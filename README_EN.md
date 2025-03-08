@@ -397,3 +397,21 @@ function Start()
     end
 end
 ```
+
+#### EVRPhoton.NickName
+Returns current player's nickname (PhotonNetwork)
+**Пример:**
+```lua
+function Start()
+    CS.UnityEngine.Debug.Log(EVRPhoton.NickName)
+end
+```
+
+#### EVRPhoton:SetNickName(string)
+Sets new nickname (PhotonNetwork)
+**Пример:**
+```lua
+function Start()
+    EVRPhoton:SetNickName("NickName")
+end
+```
