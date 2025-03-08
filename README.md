@@ -1,7 +1,7 @@
 [![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Oswald&weight=700&size=25&duration=1500&pause=1&color=F70000&background=100BFF00&multiline=true&repeat=false&width=435&height=80&lines=EnJoyTheVR;%D0%A8%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD+%D0%BF%D1%80%D0%B8%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D1%8F)](https://git.io/typing-svg)
 
 [🇬🇧 English version](README_EN.md)<br/>
-[Примеры приложений](https://github.com/Zhes-20/EnJoyTheVR/tree/main/Assets/Scenes)
+[Примеры приложений](https://github.com/Zhes-20/EnJoyTheVR/tree/main/Assets/Scenes)<br/>
 [Видео-гайд по созданию приложений](https://vkvideo.ru/video-221809760_456239080)
 
 Если вы хотите создать приложение для EnJoyTheVR, напишите в личные сообщения группы [ВКонтакте](https://vk.com/enjoythevr) или создайте Issue в репозитории на GitHub. После одобрения вашей идеи вам будет предоставлена личная версия EnJoyTheVR, предназначенная для разработчиков.
