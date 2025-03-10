@@ -268,7 +268,7 @@ EVR:DisableKeyboard()
 
 #### EVR:BKeyCode()
 Передаёт KeyCode для кнопки "B" на контроллере.<br/>
-(Аналогично с AKeyCode(), XKeyCode(), YKeyCode(), RStickButtonKeyCode(), LStickButtonKeyCode(), RKeyCode(), LKeyCode(), ZRKeyCode(), ZLKeyCode(), UPKeyCode(), DownKeyCode(), LeftKeyCode(), RightKeyCode())
+(Аналогично с AKeyCode(), XKeyCode(), YKeyCode(), RStickButtonKeyCode(), LStickButtonKeyCode(), RKeyCode(), LKeyCode(), ZRKeyCode(), ZLKeyCode(), UPKeyCode(), DownKeyCode(), LeftKeyCode(), RightKeyCode()) /левый стик - "Horizontal"/"Vertical", правый стик - "HorizontalRight"/"VerticalRight"/
 
 **Пример:**
 ```lua
