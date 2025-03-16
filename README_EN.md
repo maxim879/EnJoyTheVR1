@@ -264,7 +264,7 @@ EVR:DisableKeyboard()
 
 #### EVR:BKeyCode()
 Returns the KeyCode for the "B" button on the controller.<br/>
-(Similar functions are available for AKeyCode(), XKeyCode(), YKeyCode(), RStickButtonKeyCode(), LStickButtonKeyCode(), RKeyCode(), LKeyCode(), ZRKeyCode(), ZLKeyCode(), UPKeyCode(), DownKeyCode(), LeftKeyCode(), and RightKeyCode()).
+(Similar functions are available for AKeyCode(), XKeyCode(), YKeyCode(), RStickButtonKeyCode(), LStickButtonKeyCode(), RKeyCode(), LKeyCode(), ZRKeyCode(), ZLKeyCode(), UPKeyCode(), DownKeyCode(), LeftKeyCode(), and RightKeyCode()). /left stick - "Horizontal"/"Vertical", right stick - "HorizontalRight"/"VerticalRight"/
 
 **Example:**
 ```lua
