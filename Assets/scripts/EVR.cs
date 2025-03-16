@@ -27,6 +27,11 @@ namespace EVR
             get { return GameObject.Find("EVRHead"); }
         }
 
+        public bool Raycast(UnityEngine.Ray ray, UnityEngine.RaycastHit hitInfo)
+        {
+            return UnityEngine.Physics.Raycast( ray, out hitInfo );
+        }
+
         private string GetAssetBundlePath()
         {
             return PlayerPrefs.GetString("LastLoadedAssetBundle");
