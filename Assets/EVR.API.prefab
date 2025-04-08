@@ -44,3 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5498070e660694310a1505dc6e11a3ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerSimulator: {fileID: 2418725506820252122, guid: 514ff0dad3de543cbbab0a7db7cd505e, type: 3}
+  JoyConModeEnabled: 0

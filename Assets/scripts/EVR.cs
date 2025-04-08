@@ -14,6 +14,15 @@ namespace EVR
     [LuaCallCSharp]
     public class API : MonoBehaviour
     {
+
+        public GameObject PlayerSimulator;
+        private Transform spawn;
+
+        public void Start()
+        {
+            spawn = GameObject.Find("spawn").transform;
+            Instantiate(PlayerSimulator, spawn);
+        }
         public bool JoyConModeEnabled = false;
         public GameObject Player
         {
@@ -163,7 +172,7 @@ namespace EVR
         }
         public void BlockStick()
         {
-            Debug.Log("StandartMovementWasTurnedOFF");
+            GameObject.Find("PlayerController").GetComponent<PayerController>().BlockedStick = true;
         }
         public void UnblockInput()
         {
