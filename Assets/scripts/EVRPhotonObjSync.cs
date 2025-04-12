@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using Photon.Pun;
-using Photon.Realtime;
 using System.Reflection;
 
 namespace EVR
@@ -9,7 +8,8 @@ namespace EVR
     public class EVRPhotonObjSync : MonoBehaviour
     {
         public bool CheckIsMine = true;
-        public void SyncEvent(GameObject targetObject, string scriptName, string methodName, object[] parameters = null)
+
+        public void SyncEvent(GameObject targetObject, string scriptName, string methodName, string parameter = null)
         {
             if (targetObject == null)
             {
@@ -24,19 +24,13 @@ namespace EVR
                 return;
             }
 
-            // Сериализация параметров в строку JSON
-            string serializedParameters = SerializeParameters(parameters);
-            photonView.RPC("ExecuteEvent", RpcTarget.All, scriptName, methodName, serializedParameters);
+            // Just send the string directly instead of serializing object[]
+            photonView.RPC("ExecuteEvent", RpcTarget.All, scriptName, methodName, parameter);
         }
 
-        // RPC метод для выполнения синхронизированного события
         [PunRPC]
-        private void ExecuteEvent(string scriptName, string methodName, string serializedParams)
+        private void ExecuteEvent(string scriptName, string methodName, string parameter)
         {
-            // Десериализация строки JSON обратно в параметры
-            object[] parameters = DeserializeParameters(serializedParams);
-
-            // Находим компонент по имени
             Type scriptType = Type.GetType(scriptName);
             if (scriptType == null)
             {
@@ -44,7 +38,6 @@ namespace EVR
                 return;
             }
 
-            // Ищем экземпляр класса в объекте
             object targetScript = gameObject.GetComponent(scriptType);
             if (targetScript == null)
             {
@@ -52,7 +45,6 @@ namespace EVR
                 return;
             }
 
-            // Находим метод в компоненте
             MethodInfo method = scriptType.GetMethod(methodName);
             if (method == null)
             {
@@ -60,40 +52,9 @@ namespace EVR
                 return;
             }
 
-            // Вызываем метод
-            if (this.GetComponent<PhotonView>().IsMine == false)
+            if (!CheckIsMine || !GetComponent<PhotonView>().IsMine)
             {
-                method.Invoke(targetScript, parameters);
-            }
-            if (CheckIsMine == false)
-            {
-                method.Invoke(targetScript, parameters);
-            }
-            
-        }
-
-        // Сериализация параметров в строку JSON
-        private string SerializeParameters(object[] parameters)
-        {
-            return JsonUtility.ToJson(new ParameterWrapper(parameters));
-        }
-
-        // Десериализация строки JSON обратно в параметры
-        private object[] DeserializeParameters(string serializedParameters)
-        {
-            ParameterWrapper wrapper = JsonUtility.FromJson<ParameterWrapper>(serializedParameters);
-            return wrapper.Parameters;
-        }
-
-        // Класс-обертка для сериализации параметров
-        [System.Serializable]
-        private class ParameterWrapper
-        {
-            public object[] Parameters;
-
-            public ParameterWrapper(object[] parameters)
-            {
-                Parameters = parameters;
+                method.Invoke(targetScript, new object[] { parameter });
             }
         }
     }

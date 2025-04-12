@@ -116,7 +116,7 @@ namespace EVR
             Debug.Log($"Ownership of object {targetObject.name} transferred to this player.");
         }
 
-        public void Sync(GameObject targetObject, string scriptName, string methodName, object[] parameters = null)
+        public void Sync(GameObject targetObject, string scriptName, string methodName, string parameters = null)
         {
             targetObject.GetComponent<EVRPhotonObjSync>().SyncEvent(targetObject, scriptName, methodName, parameters);
         }
