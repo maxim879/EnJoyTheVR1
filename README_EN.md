@@ -379,7 +379,7 @@ Transfers ownership of a GameObject to the local player.
 EVRPhoton:SetOwnership(pistol)
 ```
 
-#### EVRPhoton:Sync(GameObject targetObject, string scriptName, string methodName, object[] parameters = null)
+#### EVRPhoton:Sync(GameObject targetObject, string scriptName, string methodName, string parameters = null)
 Synchronizes the execution of a specific method on a specific object among players. The object must have the "EVRPhotonObjSync.cs" script attached.
 
 **Example:**
