@@ -379,7 +379,7 @@ end
 EVRPhoton:SetOwnership(pistol)
 ```
 
-#### EVRPhoton:Sync(GameObject targetObject, string scriptName, string methodName, object[] parameters = null)
+#### EVRPhoton:Sync(GameObject targetObject, string scriptName, string methodName, string parameters = null)
 Синхронизировать исполнение нужного метода нужного объекта между игроками. На этом объекте должен находиться скрипт "EVRPhotonObjSync.cs"
 **Пример:**
 ```lua
