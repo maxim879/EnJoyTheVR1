@@ -159,6 +159,66 @@ function Start()
 end
 ```
 
+#### EVR:SetHeadBasicPosition(Transform HeadObject) 
+Changes the "zero position" of the head to the specified position.
+
+**Example:**
+```lua
+function Start()
+    EVR:SetHeadBasicPosition(object:GetComponent("Transform"))
+end
+```
+
+#### EVR:SetHeadBasicStandartPosition() 
+Resets the "zero position" of the head to the standard position.
+
+**Example:**
+```lua
+function Start()
+    EVR:SetHeadBasicStandartPosition()
+end
+```
+
+#### EVR:SetPlayerCollider(float Height = 2.0, float Radius = 0.1)
+Changes the collider of the main player.
+
+**Example:**
+```lua
+function Start()
+    EVR:SetPlayerCollider(5.5, 1.5)
+end
+```
+
+#### EVR:DoJump()
+Since jumping is not a natural action in VR, this feature is separated into a dedicated method.
+
+**Example:**
+```lua
+function Start()
+    EVR:DoJump()
+end
+```
+
+#### EVR:SetJumpForce(float JF = 3f) 
+Changes the jump strength (height) of the player.
+
+**Example:**
+```lua
+function Start()
+    EVR:SetJumpForce(10.5) 
+end
+```
+
+#### EVR:SetPlayerSpeed(float movementSpeed = 3.0f, float strafeSpeed = 3.0f) 
+Changes the movement speed of the player.
+
+**Example:**
+```lua
+function Start()
+    EVR:SetPlayerSpeed(10.5, 8.5) 
+end
+```
+
 #### EVR:SetNewHandL(GameObject)
 Replaces the left hand GameObject. If the object is not passed, it disables the hand model. (The standard hand model is disabled, the functions remain, if necessary, block the standard input, see BlockInput)
 
