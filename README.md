@@ -162,6 +162,66 @@ function Start()
 end
 ```
 
+#### EVR:SetHeadBasicPosition(Transform HeadObject) 
+Меняет "нулевые координаты" головы на заданную позицию.
+
+**Пример:**
+```lua
+function Start()
+    EVR:SetHeadBasicPosition(object:GetComponent("Transform"))
+end
+```
+
+#### EVR:SetHeadBasicStandartPosition() 
+Меняет "нулевые координаты" головы на на стандартную позицию.
+
+**Пример:**
+```lua
+function Start()
+    EVR:SetHeadBasicStandartPosition()
+end
+```
+
+#### EVR:SetPlayerCollider(float Height = 2.0, float Radius = 0.1)
+Меняет коллайдер основного игрока.
+
+**Пример:**
+```lua
+function Start()
+    EVR:SetPlayerCollider(5.5, 1.5)
+end
+```
+
+#### EVR:DoJump()
+Так как прыжки не совсем свойственны для VR, данная возможность вынесена в отдельный метод.
+
+**Пример:**
+```lua
+function Start()
+    EVR:DoJump()
+end
+```
+
+#### EVR:SetJumpForce(float JF = 3f) 
+Меняет силу(высоту) прыжка игрока.
+
+**Пример:**
+```lua
+function Start()
+    EVR:SetJumpForce(10.5) 
+end
+```
+
+#### EVR:SetPlayerSpeed(float movementSpeed = 3.0f, float strafeSpeed = 3.0f) 
+Меняет скорость перемещения игрока.
+
+**Пример:**
+```lua
+function Start()
+    EVR:SetPlayerSpeed(10.5, 8.5) 
+end
+```
+
 #### EVR:SetNewHandL(GameObject)
 Заменяет модель левой руки на переданный GameObject. Если объект не передан, отключает модель руки. (Отключается именно модель старой руки, функции остаются, при необходимости, блокируйте стандартный ввод, см. BlockInput)
 
