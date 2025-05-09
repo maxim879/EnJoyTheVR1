@@ -33,7 +33,7 @@ namespace EVR
         }
         public GameObject PlayerHead
         {
-            get { return GameObject.Find("EVRHead"); }
+            get { return GameObject.Find("CenterEyeAnchor"); }
         }
 
         public bool Raycast(UnityEngine.Ray ray, UnityEngine.RaycastHit hitInfo)

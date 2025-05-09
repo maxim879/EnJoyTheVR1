@@ -65,7 +65,7 @@ namespace BNG {
         [Tooltip("Unity Input Action used to mimic holding the Left Grip")]
         public InputActionReference LeftGripAction;
 
-        //[Tooltip("Unity Input Action used to mimic holding the Left Trigger")]
+        [Tooltip("Unity Input Action used to mimic holding the Left Trigger")]
         public InputActionReference LeftTriggerAction;
 
         [Tooltip("Unity Input Action used to mimic having your thumb near a button")]
@@ -158,7 +158,7 @@ namespace BNG {
             HMDIsActive = InputBridge.Instance.HMDActive;
 
             // Ready to go
-            if (EmulatorEnabled) {
+            if (EmulatorEnabled && !HMDIsActive) {
                 UpdateControllerPositions();
             }
         }
@@ -177,7 +177,7 @@ namespace BNG {
             HMDIsActive = InputBridge.Instance.HMDActive;
 
             // Ready to go
-            if (EmulatorEnabled) {
+            if (EmulatorEnabled && !HMDIsActive) {
 
                 if(!didFirstActivate) {
                     onFirstActivate();
@@ -194,8 +194,7 @@ namespace BNG {
             }
 
             // Device came online after emulator had started
-            // if(EmulatorEnabled && didFirstActivate && HMDIsActive)
-            if(EmulatorEnabled && didFirstActivate) {
+            if(EmulatorEnabled && didFirstActivate && HMDIsActive) {
                 ResetAll();
             }
         }
@@ -254,7 +253,7 @@ namespace BNG {
         public void UpdateInputs() {
 
             // Only override controls if no hmd is active and this script is enabled
-            if (EmulatorEnabled == false) {
+            if (EmulatorEnabled == false || HMDIsActive) {
                 return;
             }
 
@@ -266,80 +265,43 @@ namespace BNG {
             // Make sure grabbers are assigned
             checkGrabbers();
 
-            #if UNITY_IOS
+            // Simulate Left Controller states
+            if (LeftTriggerAction != null) {
+                prevVal = InputBridge.Instance.LeftTrigger;
+                InputBridge.Instance.LeftTrigger = LeftTriggerAction.action.ReadValue<float>();
+                InputBridge.Instance.LeftTriggerDown = prevVal < InputBridge.Instance.DownThreshold && InputBridge.Instance.LeftTrigger >= InputBridge.Instance.DownThreshold;
+                InputBridge.Instance.LeftTriggerUp = prevVal > InputBridge.Instance.DownThreshold && InputBridge.Instance.LeftTrigger < InputBridge.Instance.DownThreshold;
+            }
 
-                if (Input.GetKey(KeyCode.JoystickButton10))
-                {
-                    prevVal = InputBridge.Instance.LeftTrigger;
-                    InputBridge.Instance.LeftTrigger = 1f;
-                }
+            if (LeftGripAction != null) {
+                prevVal = InputBridge.Instance.LeftGrip;
+                InputBridge.Instance.LeftGrip = LeftGripAction.action.ReadValue<float>();
+                InputBridge.Instance.LeftGripDown = prevVal < InputBridge.Instance.DownThreshold && InputBridge.Instance.LeftGrip >= InputBridge.Instance.DownThreshold;
+            }
 
-                if (Input.GetKey(KeyCode.JoystickButton8))
-                {
-                    prevVal = InputBridge.Instance.LeftGrip;
-                    InputBridge.Instance.LeftGrip = 1f;
-                }
+            if(LeftThumbNearAction != null) {
+                InputBridge.Instance.LeftThumbNear = LeftThumbNearAction.action.ReadValue<float>() == 1;
+            }
 
-                if (Input.GetKey(KeyCode.JoystickButton4))
-                {
-                    InputBridge.Instance.LeftThumbNear = true;
-                }
+            // Simulate Right Controller states
+            if (RightTriggerAction!= null) {
+                float rightTriggerVal = RightTriggerAction.action.ReadValue<float>();
 
-                if (Input.GetKey(KeyCode.JoystickButton11))
-                {
-                    prevVal = InputBridge.Instance.RightTrigger;
-                    InputBridge.Instance.RightTrigger = 1f;
-                }
+                prevVal = InputBridge.Instance.RightTrigger;
+                InputBridge.Instance.RightTrigger = RightTriggerAction.action.ReadValue<float>();
+                InputBridge.Instance.RightTriggerDown = prevVal < InputBridge.Instance.DownThreshold && InputBridge.Instance.RightTrigger >= InputBridge.Instance.DownThreshold;
+                InputBridge.Instance.RightTriggerUp = prevVal > InputBridge.Instance.DownThreshold && InputBridge.Instance.RightTrigger < InputBridge.Instance.DownThreshold;
+            }
 
-                if (Input.GetKey(KeyCode.JoystickButton9))
-                {
-                    prevVal = InputBridge.Instance.RightGrip;
-                    InputBridge.Instance.RightGrip = 1f;
-                }
+            if (RightGripAction != null) {
+                prevVal = InputBridge.Instance.RightGrip;
+                InputBridge.Instance.RightGrip = RightGripAction.action.ReadValue<float>();
+                InputBridge.Instance.RightGripDown = prevVal < InputBridge.Instance.DownThreshold && InputBridge.Instance.RightGrip >= InputBridge.Instance.DownThreshold;
+            }
 
-                if (Input.GetKey(KeyCode.JoystickButton15))
-                {
-                    InputBridge.Instance.RightThumbNear = true;
-                }
-
-            #endif
-            
-            #if UNITY_ANDROID
-
-                if (Input.GetKey(KeyCode.JoystickButton6))
-                {
-                    prevVal = InputBridge.Instance.LeftTrigger;
-                    InputBridge.Instance.LeftTrigger = 1f;
-                }
-
-                if (Input.GetKey(KeyCode.JoystickButton4))
-                {
-                    prevVal = InputBridge.Instance.LeftGrip;
-                    InputBridge.Instance.LeftGrip = 1f;
-                }
-
-                // if (Input.GetKey(KeyCode.JoystickButton4))
-                // {
-                //     InputBridge.Instance.LeftThumbNear = true;
-                // }
-
-                if (Input.GetKey(KeyCode.JoystickButton7))
-                {
-                    prevVal = InputBridge.Instance.RightTrigger;
-                    InputBridge.Instance.RightTrigger = 1f;
-                }
-
-                if (Input.GetKey(KeyCode.JoystickButton5))
-                {
-                    prevVal = InputBridge.Instance.RightGrip;
-                    InputBridge.Instance.RightGrip = 1f;
-                }
-
-                if (Input.GetKey(KeyCode.JoystickButton2))
-                {
-                    InputBridge.Instance.RightThumbNear = true;
-                }
-            #endif
+            if(RightThumbNearAction) {
+                InputBridge.Instance.RightThumbNear = RightThumbNearAction.action.ReadValue<float>() == 1;
+            }
         }
 
         public void CheckPlayerControls() {
@@ -387,11 +349,11 @@ namespace BNG {
         }
 
         public virtual void UpdateControllerPositions() {
-            // leftControllerTranform.transform.localPosition = LeftControllerPosition;
-            // leftControllerTranform.transform.localEulerAngles = Vector3.zero;
+            leftControllerTranform.transform.localPosition = LeftControllerPosition;
+            leftControllerTranform.transform.localEulerAngles = Vector3.zero;
 
-            // rightControllerTranform.transform.localPosition = RightControllerPosition;
-            // rightControllerTranform.transform.localEulerAngles = Vector3.zero;
+            rightControllerTranform.transform.localPosition = RightControllerPosition;
+            rightControllerTranform.transform.localEulerAngles = Vector3.zero;
         }
 
         void checkGrabbers() {

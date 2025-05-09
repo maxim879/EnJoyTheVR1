@@ -32,7 +32,7 @@ namespace BNG {
 
 
         void Awake() {
-            initialize();
+            // initialize();
         }
 
         protected virtual void initialize() {
