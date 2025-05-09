@@ -104,6 +104,17 @@ function Start()
 end
 ```
 
+#### EVR.PlayerHead
+Возвращает GameObject головы игрока.
+
+**Пример:**
+```lua
+local player = EVR.PlayerHead
+function Start()
+    player:GetComponent("Transform").position = Vector3(0, 0, 0)
+end
+```
+
 #### EVR:Save(string, value)
 Сохраняет значение в системе PlayerPrefs по указанному ключу.
 
