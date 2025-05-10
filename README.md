@@ -48,6 +48,26 @@ Lua-скрипты размещаются по следующему пути: `A
 
 ![InvokeFunction](https://github.com/user-attachments/assets/38d1bcf6-5a2d-4a48-a9a6-9edea968f751)
 
+### Использование LuaTriggerInvoker
+
+Добавьте компонент LuaTriggerInvoker на объект с триггер-коллайдером.
+
+Укажите targetCollider — объект, при столкновении с которым будет вызвана Lua-функция (например, коллайдер головы игрока) или установите флаг UseHead = true, чтобы автоматически использовать GameObject.Find("HeadCollision") как цель.
+
+Назначьте CustomLuaLoader — компонент, отвечающий за выполнение Lua-функций.
+
+Отметьте, какие события должны вызывать Lua-функции:
+
+✅ callOnEnter — срабатывает при входе в триггер.
+
+✅ callOnExit — при выходе из триггера.
+
+✅ callOnStay — при нахождении внутри триггера каждый кадр.
+
+Впишите названия Lua-функций, которые должны вызываться (onEnterFunction, onExitFunction, onStayFunction).
+
+
+
 ---
 
 ## Как «собрать» игру?
